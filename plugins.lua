@@ -38,7 +38,18 @@ local plugins = {
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
-    ft = { "markdown", "lua", "javascript", "typescript", "typescriptreact", "javascriptreact", "html", "css", "astro" },
+    ft = {
+      "markdown",
+      "lua",
+      "javascript",
+      "typescript",
+      "typescriptreact",
+      "javascriptreact",
+      "html",
+      "css",
+      "astro",
+      "svelte",
+    },
     config = function()
       require("nvim-surround").setup {}
     end,
@@ -48,15 +59,34 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     opts = overrides.treesitter,
   },
-
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason,
-  },
+    opts = {
+      ensure_installed = {
+        "lua-language-server",
+        "stylua",
 
+        "css-lsp",
+        "html-lsp",
+        "astro-language-server",
+        "tailwindcss-language-server",
+        "typescript-language-server",
+        "deno",
+        "prettier",
+        "json-lsp",
+        "marksman",
+      },
+    },
+  },
   {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = "ahmedkhalf/project.nvim",
+    opts = overrides.telescope,
   },
 
   -- Install a plugin
@@ -71,7 +101,18 @@ local plugins = {
   {
     "folke/twilight.nvim",
     event = "VeryLazy",
-    ft = { "markdown", "lua", "javascript", "typescript", "typescriptreact", "javascriptreact", "html", "css", "astro" },
+    ft = {
+      "markdown",
+      "lua",
+      "javascript",
+      "typescript",
+      "typescriptreact",
+      "javascriptreact",
+      "html",
+      "css",
+      "astro",
+      "svelte",
+    },
     treesitter = true,
     dimming = {
       alpha = 0.25,
@@ -103,6 +144,31 @@ local plugins = {
     config = function()
       require "custom.configs.presence"
     end,
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    event = "VimEnter",
+    config = function()
+      require("project_nvim").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end,
+  },
+  {
+    "pwntester/octo.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("octo").setup()
+    end,
+  },
+  {
+    "olacin/telescope-gitmoji.nvim",
   },
 }
 
