@@ -5,8 +5,20 @@ local lint = null_ls.builtins.diagnostics
 local sources = {
 
   -- webdev stuff
-  format.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
-  format.prettier.with { filetypes = { "html", "markdown", "css", "astro" } }, -- so prettier works only on these filetypes
+  format.prettier.with {
+    filetypes = {
+      "html",
+      "markdown",
+      "css",
+      "astro",
+      "svelte",
+      "javascript",
+      "typescript",
+      "javascriptreact",
+      "typescriptreact",
+    },
+    extra_filetypes = { "svelte" },
+  }, -- so prettier works only on these filetypes
 
   -- Lua
   format.stylua,
@@ -15,4 +27,11 @@ local sources = {
 null_ls.setup {
   debug = true,
   sources = sources,
+  on_attach = function()
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
+  end,
 }
