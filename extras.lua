@@ -1,6 +1,8 @@
 ---@diagnostic disable: need-check-nil
 local create_cmd = vim.api.nvim_create_user_command
 local create_autocmd = vim.api.nvim_create_autocmd
+local clear_autocmds = vim.api.nvim_clear_autocmds
+local create_augroup = vim.api.nvim_create_augroup
 
 local settings = require("custom.config").settings
 
@@ -19,3 +21,5 @@ create_autocmd({ "UIEnter" }, {
     end
   end,
 })
+
+-- -- local augroup = create_augroup("LspFormatting", {})

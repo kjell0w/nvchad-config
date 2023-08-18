@@ -1,5 +1,20 @@
 local M = {}
 
+M.telescope = {
+  extensions_list = { "themes", "terms", "projects", "octo", "gitmoji" },
+  extensions = {
+    projects = {
+      prompt_title = "[ find projects ]",
+    },
+    octo = {
+      prompt_title = "[ octo ]",
+    },
+    gitmoji = {
+      prompt_title = "[ gitmoji ]",
+    },
+  },
+}
+
 M.treesitter = {
   ensure_installed = {
     "vim",
